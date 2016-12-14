@@ -12408,7 +12408,26 @@ var _elm_lang$html$Html_Events$Options = F2(
 		return {stopPropagation: a, preventDefault: b};
 	});
 
-var _user$project$Todo$update = F2(
+var _user$project$Model$model = {
+	tasks: {
+		ctor: '::',
+		_0: {id: 1, text: 'thing one', complete: false},
+		_1: {
+			ctor: '::',
+			_0: {id: 2, text: 'thing two', complete: false},
+			_1: {ctor: '[]'}
+		}
+	}
+};
+var _user$project$Model$Model = function (a) {
+	return {tasks: a};
+};
+var _user$project$Model$Task = F3(
+	function (a, b, c) {
+		return {id: a, text: b, complete: c};
+	});
+
+var _user$project$Update$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
 		if (_p0.ctor === 'ChangeTaskText') {
@@ -12435,33 +12454,16 @@ var _user$project$Todo$update = F2(
 				});
 		}
 	});
-var _user$project$Todo$model = {
-	tasks: {
-		ctor: '::',
-		_0: {id: 1, text: 'thing one', complete: false},
-		_1: {
-			ctor: '::',
-			_0: {id: 2, text: 'thing two', complete: false},
-			_1: {ctor: '[]'}
-		}
-	}
-};
-var _user$project$Todo$Model = function (a) {
-	return {tasks: a};
-};
-var _user$project$Todo$Task = F3(
-	function (a, b, c) {
-		return {id: a, text: b, complete: c};
-	});
-var _user$project$Todo$ToggleTask = F2(
+var _user$project$Update$ToggleTask = F2(
 	function (a, b) {
 		return {ctor: 'ToggleTask', _0: a, _1: b};
 	});
-var _user$project$Todo$ChangeTaskText = F2(
+var _user$project$Update$ChangeTaskText = F2(
 	function (a, b) {
 		return {ctor: 'ChangeTaskText', _0: a, _1: b};
 	});
-var _user$project$Todo$viewTask = function (task) {
+
+var _user$project$View$viewTask = function (task) {
 	return A2(
 		_elm_lang$html$Html$li,
 		{ctor: '[]'},
@@ -12475,7 +12477,7 @@ var _user$project$Todo$viewTask = function (task) {
 					_1: {
 						ctor: '::',
 						_0: _elm_lang$html$Html_Events$onCheck(
-							_user$project$Todo$ToggleTask(task)),
+							_user$project$Update$ToggleTask(task)),
 						_1: {ctor: '[]'}
 					}
 				},
@@ -12490,7 +12492,7 @@ var _user$project$Todo$viewTask = function (task) {
 						_1: {
 							ctor: '::',
 							_0: _elm_lang$html$Html_Events$onInput(
-								_user$project$Todo$ChangeTaskText(task.id)),
+								_user$project$Update$ChangeTaskText(task.id)),
 							_1: {ctor: '[]'}
 						}
 					},
@@ -12515,13 +12517,13 @@ var _user$project$Todo$viewTask = function (task) {
 			}
 		});
 };
-var _user$project$Todo$viewTasks = function (tasks) {
+var _user$project$View$viewTasks = function (tasks) {
 	return A2(
 		_elm_lang$html$Html$ul,
 		{ctor: '[]'},
-		A2(_elm_lang$core$List$map, _user$project$Todo$viewTask, tasks));
+		A2(_elm_lang$core$List$map, _user$project$View$viewTask, tasks));
 };
-var _user$project$Todo$view = function (model) {
+var _user$project$View$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
@@ -12532,23 +12534,24 @@ var _user$project$Todo$view = function (model) {
 				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text('Todo App'),
+					_0: _elm_lang$html$Html$text('Todo App Test'),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
 				ctor: '::',
-				_0: _user$project$Todo$viewTasks(model.tasks),
+				_0: _user$project$View$viewTasks(model.tasks),
 				_1: {ctor: '[]'}
 			}
 		});
 };
-var _user$project$Todo$main = _elm_lang$html$Html$beginnerProgram(
-	{view: _user$project$Todo$view, update: _user$project$Todo$update, model: _user$project$Todo$model})();
+
+var _user$project$Main$main = _elm_lang$html$Html$beginnerProgram(
+	{view: _user$project$View$view, update: _user$project$Update$update, model: _user$project$Model$model})();
 
 var Elm = {};
-Elm['Todo'] = Elm['Todo'] || {};
-if (typeof _user$project$Todo$main !== 'undefined') {
-    _user$project$Todo$main(Elm['Todo'], 'Todo', {"types":{"unions":{"Todo.Msg":{"args":[],"tags":{"ToggleTask":["Todo.Task","Bool"],"ChangeTaskText":["Int","String"]}}},"aliases":{"Todo.Task":{"args":[],"type":"{ id : Int, text : String, complete : Bool }"}},"message":"Todo.Msg"},"versions":{"elm":"0.18.0"}});
+Elm['Main'] = Elm['Main'] || {};
+if (typeof _user$project$Main$main !== 'undefined') {
+    _user$project$Main$main(Elm['Main'], 'Main', {"types":{"unions":{"Update.Msg":{"args":[],"tags":{"ToggleTask":["Model.Task","Bool"],"ChangeTaskText":["Int","String"]}}},"aliases":{"Model.Task":{"args":[],"type":"{ id : Int, text : String, complete : Bool }"}},"message":"Update.Msg"},"versions":{"elm":"0.18.0"}});
 }
 
 if (typeof define === "function" && define['amd'])
