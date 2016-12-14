@@ -10,14 +10,15 @@ import Update exposing (..)
 view : Model -> Html Msg
 view model =
     div []
-        [ h1 [] [ text "Todo App Test" ]
+        [ h1 [] [ text "Todo App" ]
         , viewTasks model.tasks
         ]
 
 
 viewTasks : List Task -> Html Msg
 viewTasks tasks =
-    ul [] (List.map viewTask tasks)
+    ul []
+        (List.map viewTask tasks)
 
 
 viewTask : Task -> Html Msg
