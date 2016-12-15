@@ -4,22 +4,19 @@ import Model exposing (..)
 
 
 type Msg
-    = ChangeTaskText Int String
+    = UpdateTaskText String
     | ToggleTask Task Bool
+    | AddTask
 
 
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        ChangeTaskText id text ->
-            let
-                updateTaskText task =
-                    if task.id == id then
-                        { task | text = text }
-                    else
-                        task
-            in
-                { model | tasks = List.map updateTaskText model.tasks }
+        UpdateTaskText text ->
+            { model | newTask = text }
+
+        AddTask ->
+            { model | newTask = "" }
 
         ToggleTask task complete ->
             let
