@@ -1,6 +1,7 @@
 module Update exposing (..)
 
 import Model exposing (..)
+import Array exposing (push)
 
 
 type Msg
@@ -16,7 +17,16 @@ update msg model =
             { model | newTask = text }
 
         AddTask ->
-            { model | newTask = "" }
+            let
+                newTask : Task
+                newTask =
+                    Task model.newId model.newTask False
+
+                tasks : List Task
+                tasks =
+                    List.append model.tasks [ newTask ]
+            in
+                { newTask = "", newId = model.newId + 1, tasks = tasks }
 
         ToggleTask task complete ->
             let

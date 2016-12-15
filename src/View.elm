@@ -32,7 +32,8 @@ viewTasks tasks =
 
 viewTask : Task -> Html Msg
 viewTask task =
-    li []
-        [ input [ type_ "checkbox", onCheck (ToggleTask task) ] []
-        , span [] [ text task.text ]
+    li [ classList [ ( "done", task.complete ) ] ]
+        [ input [ id (toString task.id), type_ "checkbox", onCheck (ToggleTask task) ] []
+        , label [ for (toString task.id) ]
+            [ span [] [ text task.text ] ]
         ]

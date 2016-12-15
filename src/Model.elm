@@ -4,6 +4,7 @@ module Model exposing (..)
 type alias Model =
     { tasks : List Task
     , newTask : String
+    , newId : Int
     }
 
 
@@ -14,8 +15,7 @@ type alias Task =
 model : Model
 model =
     { tasks =
-        [ { id = 1, text = "thing one", complete = False }
-        , { id = 2, text = "thing two", complete = False }
-        ]
+        [ { id = 1, text = "Clean the bathroom", complete = False } ]
+    , newId = 3
     , newTask = ""
     }

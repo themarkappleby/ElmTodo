@@ -19,3 +19,7 @@ li {
   display: inline-block;
   margin-left: 15px;
 }
+
+.done {
+  opacity: 0.3;
+}
