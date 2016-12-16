@@ -7,6 +7,7 @@ import Array exposing (push)
 type Msg
     = UpdateTaskText String
     | ToggleTask Task Bool
+    | ClearTasks
     | AddTask
 
 
@@ -27,6 +28,14 @@ update msg model =
                     List.append model.tasks [ newTask ]
             in
                 { newTask = "", newId = model.newId + 1, tasks = tasks }
+
+        ClearTasks ->
+            let
+                clearedTasks : List Task -> List Task
+                clearedTasks tasks =
+                    List.filter (\t -> not t.complete) tasks
+            in
+                { model | tasks = clearedTasks model.tasks }
 
         ToggleTask task complete ->
             let
